@@ -1,8 +1,6 @@
 import * as tf from '@tensorflow/tfjs';
-import * as tfc from '@tensorflow/tfjs-converter';
 import { useEffect } from 'react';
 window.tf = tf;
-window.tfc = tfc;
 window.progress = 0;
 window.bytesUsed = 0;
 
