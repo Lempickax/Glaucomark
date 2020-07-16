@@ -23,7 +23,7 @@ kiwisolver==1.2.0
 lxml==4.5.2
 Markdown==3.2.2
 MarkupSafe==1.1.1
-matplotlib @ file:///C:/ci/matplotlib-base_1592846084747/work
+matplotlib 
 mkl-fft==1.1.0
 mkl-random==1.1.1
 mkl-service==2.3.0
