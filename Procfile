@@ -1,1 +1,1 @@
-web: gunicorn app:glaucomark
+web: gunicorn app:app

@@ -9,25 +9,13 @@ import {
 	ProgressBar,
 } from 'react-bootstrap';
 import { generateImage } from './predict.js';
-import { detectImage } from './detect';
 import Modal from './UI/Modal/Modal';
-import Aux from './hoc/Auks/Auks';
 import PressButton from './UI/Button/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import * as tf from '@tensorflow/tfjs';
-import * as tfc from '@tensorflow/tfjs-converter';
 
-// window.tf = tf;
-// window.tfc = tfc;
-// window.progress = 0;
-// window.bytesUsed = 0;
 
-// tf.enableProdMode();
 
-// let start;
-
-// const MODEL_URL = window.location.href + '/model_full/model.json';
 
 class App extends Component {
 	state = {
