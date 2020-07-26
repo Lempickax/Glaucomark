@@ -1,21 +1,11 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {
-	Button,
-	Form,
-	Container,
-	Row,
-	Col,
-	ProgressBar,
-} from 'react-bootstrap';
+import { Button, Container, Row, Col, Spinner } from 'react-bootstrap';
 import { generateImage } from './predict.js';
 import Modal from './UI/Modal/Modal';
 import PressButton from './UI/Button/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-
-
-
 
 class App extends Component {
 	state = {
@@ -48,17 +38,17 @@ class App extends Component {
 		reader.readAsDataURL(input.files[0]);
 	};
 	detectOD = (img) => {
-		
 		let fd = new FormData();
 		fd.append('image', img.files[0]);
 		console.log(...fd);
-		fetch('/image', {
+		fetch('http://47.251.47.22:5000/image', {
 			method: 'POST',
 			//headers: {'Content-Type':'multipart/form-data'},
 			body: fd,
-		}).then((response) => response.text())
+		})
+			.then((response) => response.text())
 			.then((result) => {
-				this.setState({ ImageURL: ('data:image/png;base64,'+ result) });
+				this.setState({ ImageURL: 'data:image/png;base64,' + result });
 			})
 			.catch((error) => console.log('error', error));
 	};
@@ -97,12 +87,14 @@ class App extends Component {
 			await generateImage('output', 'result');
 			success = true;
 		} catch (error) {
-			
-			setTimeout(this.setState({
-				generationStatus: 0,
-			}), 3000)
-			
-			await this.generate()
+			setTimeout(
+				this.setState({
+					generationStatus: 0,
+				}),
+				3000
+			);
+
+			await this.generate();
 		}
 
 		if (success) {
@@ -133,49 +125,37 @@ class App extends Component {
 					{/* change layout after user press predict button */}
 
 					<Row className="margin">
-						
-						
-							<div className="topbar"
-							>
-								<h1 style={{textAlign: "center", width: "100%"}}>GlaucoMark.js: Take a Glaucoma Test at Home</h1>
-								{/* {<a
-									href="https://github.com/TonyLianLong/AnimeGAN.js"
+						<div className="topbar">
+							<h1 style={{ textAlign: 'center', width: '100%' }}>
+								GlaucoMark.js: Take a Glaucoma Test at Home
+							</h1>
+							{
+								<a
+									href="https://github.com/Lempickax/Glaucomark"
 									style={{ fontSize: '12px' }}
 								>
 									View Source Code
-								</a>} */}
-							</div>
-						
-						
+								</a>
+							}
+						</div>
 					</Row>
 					<Row className="margin">
 						<Col />
-						<Col xs="12" md="8" lg="6">
-							{/* <Form>
-								<Form.File
-									accept="image/*"
-									label={
-										this.state.uploaded
-											? 'Change the image'
-											: 'Upload an image'
-									}
-									onChange={this.onUpload}
-									multiple={false}
-									custom
-								/>
-							</Form> */}
-						</Col>
+						<Col xs="12" md="8" lg="6"></Col>
 						<Col />
 					</Row>
 					<Row className="margin">
 						<Col />
-						<Col 
+						<Col
 							xs="12"
 							md="8"
 							lg="5"
 							xl="4"
 							style={{ textAlign: 'center', marginTop: '80px' }}
-						><h5 style={{textAlign: "center", width: "100%"}}>Upload a image of retina to continue</h5>
+						>
+							<h5 style={{ textAlign: 'center', width: '100%' }}>
+								Upload a image of retina to continue
+							</h5>
 							<input
 								label={
 									this.state.uploaded
@@ -282,9 +262,14 @@ class App extends Component {
 									lg="6"
 									style={{ textAlign: 'center' }}
 								>
-									<p>Predicting Result...</p>
+									<Spinner animation="border" role="status">
+										<span className="sr-only">
+											Loading...
+										</span>
+									</Spinner>
+									<p>Predicting results...</p>
 									<p>
-										This may take 5 to 10 seconds depending
+										This may take 15 to 30 seconds depending
 										on your device.
 									</p>
 								</Col>
@@ -313,7 +298,7 @@ class App extends Component {
 								xl="4"
 								style={{ textAlign: 'center', margin: '20px' }}
 							>
-								<img id="output"  src={this.state.ImageURL}/>
+								<img id="output" src={this.state.ImageURL} />
 								<div id="result"></div>
 							</Col>
 							<Col />
@@ -327,33 +312,6 @@ class App extends Component {
 								xl="10"
 								style={{ textAlign: 'center', margin: '20px' }}
 							>
-								{/* <p>
-									If you are on a mobile device, long press to
-									save the image.
-								</p>
-								<p>
-									If you are on a desktop device, right click
-									to save the image.
-								</p>
-								<p>
-									If it looks good, you could{' '}
-									<a href="https://github.com/TonyLianLong/AnimeGAN.js">
-										give AnimeGAN.js a star{' '}
-										<span role="img" aria-label="star">
-											🌟
-										</span>{' '}
-										on Github
-									</a>
-									.
-								</p>
-								<p>
-									AnimeGAN.js uses the trained model from
-									AnimeGAN. If you are interested in how the
-									TensorFlow version of AnimeGAN works,{' '}
-									<a href="https://github.com/TachibanaYoshino/AnimeGAN">
-										click here
-									</a>
-								</p> */}
 								<Button
 									variant="primary"
 									onClick={() => window.location.reload()}
