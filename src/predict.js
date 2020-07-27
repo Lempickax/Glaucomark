@@ -44,8 +44,10 @@ const generate = async (model, img, output) => {
 	console.log('generated.print: ' + generated.flatten().arraySync());
 	let result = (1 - generated.flatten().arraySync()) * 100;
 	output.innerHTML =
-		'The chance that you test postive for glaucoma is ' + result + '%';
+		'The chance for positive glaucoma is ' + result + '%';
 	generated.dispose();
+
+	return true
 };
 
 const generateImage = async (img_id, canvas_id) => {

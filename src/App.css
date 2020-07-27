@@ -20,6 +20,33 @@ h1 {
 	z-index: 90;
 }
 
+.topbar a{
+  font-size: 12px;
+  width: auto;
+}
+
+.title {
+  text-align: center;
+  width: 100%;
+  left: 4.5%;
+  position: relative;
+}
+
+@media (max-width: 499px) {
+  .topbar a{
+    display: none;
+  }
+  
+  .title {
+    text-align: center;
+    font-size: smaller;
+    width: 100%;
+    left: 4.5%;
+    position: relative;
+  }
+}
+
+
 .margin {
   margin-top: 50px;
   margin: 5px;

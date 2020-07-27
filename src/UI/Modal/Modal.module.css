@@ -10,11 +10,32 @@
     top: 30%;
     box-sizing: border-box;
     transition: all 0.3s ease-out;
+    overflow: scroll;
+    -ms-overflow-style: none;  
+    scrollbar-width: none; 
+    
 }
+
+.Modal::-webkit-scrollbar {
+    display: none;
+  }
 
 @media (min-width: 600px) {
     .Modal {
         width: 500px;
         left: calc(50% - 250px);
     }
+}
+
+@media (max-width: 599px) {
+    .Modal {
+       
+        font-size: small;
+        width: 70%;
+        top: 10%;
+        bottom: 10%;
+        
+        
+    }
+    
 }

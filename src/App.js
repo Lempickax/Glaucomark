@@ -7,7 +7,7 @@ import PressButton from './UI/Button/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
-var ODimageData;
+let success = false;
 var ODimage = new Image();
 class App extends Component {
 	state = {
@@ -51,11 +51,14 @@ class App extends Component {
 		let fd = new FormData();
 		fd.append('image', img.files[0]);
 		console.log(...fd);
-		fetch('https://cors-anywhere.herokuapp.com/http://47.251.47.22:5000/image', {
-			method: 'POST',
-			//headers: {'Content-Type':'multipart/form-data'},
-			body: fd,
-		})
+		fetch(
+			'https://cors-anywhere.herokuapp.com/http://47.251.47.22:5000/image',
+			{
+				method: 'POST',
+				//headers: {'Content-Type':'multipart/form-data'},
+				body: fd,
+			}
+		)
 			.then((response) => response.text())
 			.then((result) => {
 				ODimage.src = 'data:image/png;base64,' + result;
@@ -65,33 +68,14 @@ class App extends Component {
 						width: ODimage.width,
 						height: ODimage.width,
 					});
-					// const canvas = document.getElementById('output');
-					// const ctx = canvas.getContext('2d');
-					// ctx.drawImage(ODimage, 0, 0);
-					// ODimageData = ctx.getImageData(
-					// 	0,
-					// 	0,
-					// 	ODimage.width,
-					// 	ODimage.width
-					// );
-					// console.log(ODimageData);
-				};
-					generateImage('output', 'result');
-					var success = true
-					// this.setState({
-					// 	generationStatus: 0,
-					// });
-					console.log('detected');
-					if (success) {
-						this.setState({
-							generationStatus: 2,
-						});
-					}
-				
 
-			
-				
-				
+				};
+				success = generateImage('output', 'result');
+				if (success) {
+					setTimeout(() => {
+						this.setState({ generationStatus: 2 });
+					}, 2000);
+				}
 			})
 			.catch((error) => console.log('error', error));
 	};
@@ -124,19 +108,15 @@ class App extends Component {
 			generationStatus: 1,
 			updateGenerationProgressInterval: updateGenerationProgressInterval,
 		});
-		let success = false;
+
 		try {
 			await this.detectOD(document.getElementById('image'));
-			
-			// await generateImage(OD, 'result');
-			await console.log('detected');
-			
-			//await this.generate();
 		} catch (error) {
-			console.log(error);
+			alert('Error encountered while generating image: ' + error);
+			this.setState({
+				generationStatus: 0,
+			});
 		}
-
-		
 	};
 
 	componentWillUnmount = () => {
@@ -161,14 +141,11 @@ class App extends Component {
 
 					<Row className="margin">
 						<div className="topbar">
-							<h1 style={{ textAlign: 'center', width: '100%' }}>
-								GlaucoMark.js: Take a Glaucoma Test at Home
+							<h1 className="title">
+								GlaucoMark: Take a Glaucoma Test at Home
 							</h1>
 							{
-								<a
-									href="https://github.com/Lempickax/Glaucomark"
-									style={{ fontSize: '12px' }}
-								>
+								<a href="https://github.com/Lempickax/Glaucomark">
 									View Source Code
 								</a>
 							}
@@ -229,22 +206,22 @@ class App extends Component {
 							>
 								<div>
 									<h1>Term of Use </h1>
-									<p>
+									<p style={{ textAlign: 'left' }}>
 										The result from this website can only be
 										used as references.
 									</p>
-									<p>
+									<p style={{ textAlign: 'left' }}>
 										While the predicting model had been
 										validated with a high accuracy, the
 										training dataset still lacks variety.{' '}
 									</p>
-									<p>
+									<p style={{ textAlign: 'left' }}>
 										Thus, the author of this site makes no
 										claims, promises or guarantees about the
 										testing results, and expressly disclaims
 										liability for any potential errors.
 									</p>
-									<p>
+									<p style={{ fontWeight: 'bold' }}>
 										Please see a doctor for final diagnosis.{' '}
 									</p>
 								</div>
@@ -327,7 +304,7 @@ class App extends Component {
 				>
 					<Container fluid>
 						<Row className="margin">
-							<Col/>
+							<Col />
 							<Col
 								textAlign="center"
 								xs="12"
@@ -336,14 +313,10 @@ class App extends Component {
 								xl="4"
 								style={{ textAlign: 'center', margin: '20px' }}
 							>
-								<img
-									id="output"
-									src={this.state.ImageURL}
-									
-								/>
+								<img id="output" src={this.state.ImageURL} />
 								<div id="result"></div>
 							</Col>
-							<Col/>
+							<Col />
 						</Row>
 						<Row className="margin">
 							<Col />
