@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "16c5b620d2a45961cd45a89d11d6db6b",
+    "revision": "e0578f9b0278d3bd972963ae21501a3e",
     "url": "/Glaucomark/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Glaucomark/static/css/2.af3c1da9.chunk.css"
   },
   {
-    "revision": "c7738dd09ea9e696815b",
+    "revision": "333defc477e0083746fc",
     "url": "/Glaucomark/static/css/main.afaa84ac.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/Glaucomark/static/js/2.c647b0f7.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "c7738dd09ea9e696815b",
-    "url": "/Glaucomark/static/js/main.9edd7706.chunk.js"
+    "revision": "333defc477e0083746fc",
+    "url": "/Glaucomark/static/js/main.4b437e5f.chunk.js"
   },
   {
     "revision": "4ab9823862291dda2d14",
