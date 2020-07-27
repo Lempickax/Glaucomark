@@ -7,6 +7,8 @@ import PressButton from './UI/Button/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
+var ODimageData;
+var ODimage = new Image();
 class App extends Component {
 	state = {
 		uploadedImageURL: 'data:image/png;',
@@ -16,7 +18,10 @@ class App extends Component {
 		updateGenerationProgressInterval: -1,
 		bytesUsed: 0,
 		operating: false,
+		width: 1,
+		height: 1,
 	};
+
 	operateCancelHandler = () => {
 		this.setState({ operating: false });
 	};
@@ -30,25 +35,63 @@ class App extends Component {
 		var reader = new FileReader();
 		reader.onload = () => {
 			var dataURL = reader.result;
-			this.setState({
-				uploadedImageURL: dataURL,
-				uploaded: true,
-			});
+			var image = new Image();
+			image.src = dataURL;
+			image.onload = () => {
+				this.setState({
+					uploadedImageURL: dataURL,
+					uploaded: true,
+				});
+			};
 		};
+
 		reader.readAsDataURL(input.files[0]);
 	};
 	detectOD = (img) => {
 		let fd = new FormData();
 		fd.append('image', img.files[0]);
 		console.log(...fd);
-		fetch('http://47.251.47.22:5000/image', {
+		fetch('/image', {
 			method: 'POST',
 			//headers: {'Content-Type':'multipart/form-data'},
 			body: fd,
 		})
 			.then((response) => response.text())
 			.then((result) => {
+				ODimage.src = 'data:image/png;base64,' + result;
 				this.setState({ ImageURL: 'data:image/png;base64,' + result });
+				ODimage.onload = () => {
+					this.setState({
+						width: ODimage.width,
+						height: ODimage.width,
+					});
+					// const canvas = document.getElementById('output');
+					// const ctx = canvas.getContext('2d');
+					// ctx.drawImage(ODimage, 0, 0);
+					// ODimageData = ctx.getImageData(
+					// 	0,
+					// 	0,
+					// 	ODimage.width,
+					// 	ODimage.width
+					// );
+					// console.log(ODimageData);
+				};
+					generateImage('output', 'result');
+					var success = true
+					// this.setState({
+					// 	generationStatus: 0,
+					// });
+					console.log('detected');
+					if (success) {
+						this.setState({
+							generationStatus: 2,
+						});
+					}
+				
+
+			
+				
+				
 			})
 			.catch((error) => console.log('error', error));
 	};
@@ -84,24 +127,16 @@ class App extends Component {
 		let success = false;
 		try {
 			await this.detectOD(document.getElementById('image'));
-			await generateImage('output', 'result');
-			success = true;
+			
+			// await generateImage(OD, 'result');
+			await console.log('detected');
+			
+			//await this.generate();
 		} catch (error) {
-			setTimeout(
-				this.setState({
-					generationStatus: 0,
-				}),
-				3000
-			);
-
-			await this.generate();
+			console.log(error);
 		}
 
-		if (success) {
-			this.setState({
-				generationStatus: 2,
-			});
-		}
+		
 	};
 
 	componentWillUnmount = () => {
@@ -169,6 +204,8 @@ class App extends Component {
 								name="image"
 								id="image"
 								alt=""
+								width={this.state.width}
+								height={this.state.height}
 							/>
 							<img
 								id="uploaded-image"
@@ -290,18 +327,23 @@ class App extends Component {
 				>
 					<Container fluid>
 						<Row className="margin">
-							<Col />
+							<Col/>
 							<Col
+								textAlign="center"
 								xs="12"
 								md="8"
 								lg="5"
 								xl="4"
 								style={{ textAlign: 'center', margin: '20px' }}
 							>
-								<img id="output" src={this.state.ImageURL} />
+								<img
+									id="output"
+									src={this.state.ImageURL}
+									
+								/>
 								<div id="result"></div>
 							</Col>
-							<Col />
+							<Col/>
 						</Row>
 						<Row className="margin">
 							<Col />
