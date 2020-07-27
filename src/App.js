@@ -51,7 +51,7 @@ class App extends Component {
 		let fd = new FormData();
 		fd.append('image', img.files[0]);
 		console.log(...fd);
-		fetch('https://47.251.47.22:5000/image', {
+		fetch('http://47.251.47.22:5000/image', {
 			method: 'POST',
 			//headers: {'Content-Type':'multipart/form-data'},
 			body: fd,
