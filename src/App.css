@@ -44,8 +44,9 @@ h1 {
     left: 4.5%;
     position: relative;
   }
+  
+  
 }
-
 
 .margin {
   margin-top: 50px;
@@ -58,10 +59,25 @@ h1 {
   border-radius: 5px;
 }
 
+.button{
+  margin: 0;
+  position: absolute;
+
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
 #output {
   width: 100%;
   border: 1px solid;
   border-radius: 5px;
+}
+
+.outimg{
+  display: block;
+  margin: auto;
+ 
+  
 }
 
 .overlay {

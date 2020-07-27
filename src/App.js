@@ -68,14 +68,16 @@ class App extends Component {
 						width: ODimage.width,
 						height: ODimage.width,
 					});
-
 				};
-				success = generateImage('output', 'result');
-				if (success) {
-					setTimeout(() => {
-						this.setState({ generationStatus: 2 });
-					}, 2000);
-				}
+				generateImage('output', 'result');
+				success = true;
+				console.log(document.getElementById("result").innerHTML)
+				let checker = setInterval(()=>{
+					if(document.getElementById("result").innerHTML!==""){
+						this.setState({generationStatus: 2});
+						clearInterval(checker)
+					}
+				},1000)
 			})
 			.catch((error) => console.log('error', error));
 	};
@@ -123,6 +125,9 @@ class App extends Component {
 		if (this.state.updateGenerationProgressInterval !== -1) {
 			clearInterval(this.state.updateGenerationProgressInterval);
 		}
+	};
+	componentWillMount = () => {
+		
 	};
 
 	render() {
@@ -306,26 +311,29 @@ class App extends Component {
 						<Row className="margin">
 							<Col />
 							<Col
-								textAlign="center"
 								xs="12"
 								md="8"
 								lg="5"
 								xl="4"
-								style={{ textAlign: 'center', margin: '20px' }}
+								style={{
+									textAlign: 'center',
+									marginBottom: '20px',
+								}}
 							>
-								<img id="output" src={this.state.ImageURL} />
-								<div id="result"></div>
+								<div>
+									<img
+										id="output"
+										src={this.state.ImageURL}
+									/>
+									<div id="result"></div>
+								</div>
 							</Col>
 							<Col />
 						</Row>
 						<Row className="margin">
-							<Col />
-							<Col
-								xs="12"
-								md="12"
-								lg="12"
-								xl="10"
-								style={{ textAlign: 'center', margin: '20px' }}
+							<div
+								className="button"
+								style={{ textAlign: 'center', margin: '0px' }}
 							>
 								<Button
 									variant="primary"
@@ -333,8 +341,7 @@ class App extends Component {
 								>
 									Restart
 								</Button>
-							</Col>
-							<Col />
+							</div>
 						</Row>
 					</Container>
 				</div>

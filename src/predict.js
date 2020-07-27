@@ -10,23 +10,11 @@ let start;
 
 const MODEL_URL = window.location.href + 'model_full/model.json';
 
-const checkOD = (img) => {
-	if (img != undefined) return true;
-	setTimeout(function () {
-		return false;
-	}, 1000);
-};
+
 const generate = async (model, img, output) => {
 	console.log('Generation start');
-	console.log(img);
-	// while(img == undefined){
-	// 	setTimeout(function () {
-	// 		console.log("Processing Image");
-	// 	}, 1000);
-	// }
-	// console.log(checkOD(img));
-	let img_tensor = tf.browser.fromPixels(img);
 
+	let img_tensor = tf.browser.fromPixels(img);
 	let scaled_img_tensor;
 	console.log('Original image size:', img_tensor.shape);
 	scaled_img_tensor = tf.tidy(() =>
@@ -39,15 +27,13 @@ const generate = async (model, img, output) => {
 	let end = performance.now();
 	console.log('Image Generated');
 	console.log(`Took ${(end - start) / 1000} s to generate the image`);
-
-	// tf.browser.toPixels((generated.squeeze(0).add(1)).div(2), output);
 	console.log('generated.print: ' + generated.flatten().arraySync());
 	let result = (1 - generated.flatten().arraySync()) * 100;
+	result = result.toFixed(2)
 	output.innerHTML =
 		'The chance for positive glaucoma is ' + result + '%';
-	generated.dispose();
-
-	return true
+	await generated.dispose();
+	
 };
 
 const generateImage = async (img_id, canvas_id) => {
