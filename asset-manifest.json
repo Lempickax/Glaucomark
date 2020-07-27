@@ -1,0 +1,26 @@
+{
+  "files": {
+    "main.css": "/Glaucomark/static/css/main.afaa84ac.chunk.css",
+    "main.js": "/Glaucomark/static/js/main.0a7b1901.chunk.js",
+    "main.js.map": "/Glaucomark/static/js/main.0a7b1901.chunk.js.map",
+    "runtime-main.js": "/Glaucomark/static/js/runtime-main.c0604f12.js",
+    "runtime-main.js.map": "/Glaucomark/static/js/runtime-main.c0604f12.js.map",
+    "static/css/2.af3c1da9.chunk.css": "/Glaucomark/static/css/2.af3c1da9.chunk.css",
+    "static/js/2.69640810.chunk.js": "/Glaucomark/static/js/2.69640810.chunk.js",
+    "static/js/2.69640810.chunk.js.map": "/Glaucomark/static/js/2.69640810.chunk.js.map",
+    "index.html": "/Glaucomark/index.html",
+    "precache-manifest.c7581dc7305837b47e1eb11245b6e12a.js": "/Glaucomark/precache-manifest.c7581dc7305837b47e1eb11245b6e12a.js",
+    "service-worker.js": "/Glaucomark/service-worker.js",
+    "static/css/2.af3c1da9.chunk.css.map": "/Glaucomark/static/css/2.af3c1da9.chunk.css.map",
+    "static/css/main.afaa84ac.chunk.css.map": "/Glaucomark/static/css/main.afaa84ac.chunk.css.map",
+    "static/js/2.69640810.chunk.js.LICENSE.txt": "/Glaucomark/static/js/2.69640810.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/Glaucomark/static/media/logo.ee7cd8ed.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.c0604f12.js",
+    "static/css/2.af3c1da9.chunk.css",
+    "static/js/2.69640810.chunk.js",
+    "static/css/main.afaa84ac.chunk.css",
+    "static/js/main.0a7b1901.chunk.js"
+  ]
+}
