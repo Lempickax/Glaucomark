@@ -1,0 +1,93 @@
+h1 {
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: #6d6d6d;
+  }
+  .topbar {
+    text-align: center;
+    height: 56px;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color:white;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: 0 4px 8px 0 rgba(7, 17, 27, 0.1);
+      align-items: center;
+      padding: 0 20px;
+      box-sizing: border-box;
+      z-index: 90;
+  }
+  
+  .topbar a{
+    font-size: 12px;
+    width: auto;
+  }
+  
+  .title {
+    text-align: center;
+    width: 100%;
+    left: 4.5%;
+    position: relative;
+  }
+  
+  @media (max-width: 499px) {
+    .topbar a{
+      display: none;
+    }
+    
+    .title {
+      text-align: center;
+      font-size: smaller;
+      width: 100%;
+      left: 4.5%;
+      position: relative;
+    }
+    
+    
+  }
+  
+  .margin {
+    margin-top: 50px;
+    margin: 5px;
+  }
+  
+  #uploaded-image {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+  
+  .button{
+    margin: 0;
+    position: absolute;
+  
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+  #output {
+    width: 100%;
+    border: 1px solid;
+    border-radius: 5px;
+  }
+  
+  .outimg{
+    display: block;
+    margin: auto;
+   
+    
+  }
+  
+  .overlay {
+    width: 100%;
+    height: 100vh;
+    left: 0px;
+    top: 0px;
+    display: block;
+    position: absolute;
+    background-color: #f9f6eb;
+    z-index: 999;
+  }
+  
